@@ -1,4 +1,4 @@
-package com.company.misc;
+package com.company.misc.Task91;
 
 public class CountToBomb extends Thread {
     public void run(){

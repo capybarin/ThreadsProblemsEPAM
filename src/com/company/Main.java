@@ -1,25 +1,14 @@
 package com.company;
 
-import com.company.misc.CountToBomb;
-import com.company.misc.IncAndOutput;
+import com.company.misc.Task91.CountToBomb;
+import com.company.misc.Task92.IncAndOutput;
+import com.company.misc.Task93.ConcurrentHashMapWorker;
+import com.company.misc.Task93.HashMapWorker;
+
+import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Main {
-    private void tmp() {
-        IncAndOutput incAndOutput = new IncAndOutput();
-        int num = 1_000_000;
-
-        new Thread(() -> {
-            for (int j = 0; j < num; j++) {
-                incAndOutput.Inc();
-            }
-        }).start();
-
-        new Thread(() -> {
-            for (int j = 0; j < num; j++) {
-                incAndOutput.Output();
-            }
-        }).start();
-    }
 
     public static void main(String[] args) {
         /**
@@ -33,6 +22,24 @@ public class Main {
          */
         IncAndOutput incAndOutput = new IncAndOutput();
         //incAndOutput.run();
+
+        /**Task 9.3
+         *
+         */
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        ConcurrentHashMap<Integer, Integer> concurrentHashMap = new ConcurrentHashMap<>();
+
+        HashMapWorker hashMapWorker = new HashMapWorker(hashMap);
+        ConcurrentHashMapWorker concurrentHashMapWorker = new ConcurrentHashMapWorker(concurrentHashMap);
+
+        Thread threadHash = new Thread(hashMapWorker);
+        Thread threadConcHash = new Thread(concurrentHashMapWorker);
+
+        threadHash.start();
+        threadConcHash.start();
+
+        System.out.println("hash timer: " + hashMapWorker.getTimer() + "ns");
+        System.out.println("concHash timer: " + concurrentHashMapWorker.getTimer() + "ns");
 
         
     }

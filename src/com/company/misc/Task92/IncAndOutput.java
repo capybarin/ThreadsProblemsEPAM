@@ -1,4 +1,4 @@
-package com.company.misc;
+package com.company.misc.Task92;
 
 public class IncAndOutput extends Thread{
     private int i = 0;
